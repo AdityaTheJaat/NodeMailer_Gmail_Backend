@@ -2,7 +2,8 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const signup = async (req, res) => {
-    const {email, name, number, file} = req.body;
+    const {email, name, number, imgUrl} = req.body;
+    console.log(req)
 	let transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",
 		port: 465,
@@ -16,15 +17,8 @@ const signup = async (req, res) => {
         from: `${"TEDxLNMIIT 2k23"} <example.com>`,
         to: "theaditya1985@gmail.com",
         subject: `Payment Confirmation email from ${email}`,
-        html: `<p>Payment has done by: ${name} <br/> email: ${email}<br/> phoneNumber: ${number}<br/> file is attached below ->${file}</p>`
+        html: `<p>Payment has done by: ${name} <br/> email: ${email}<br/> phoneNumber: ${number}<br/> file link ->${imgUrl}</p>`
     };
-	// let message = {
-	// 	from: `${"TEDxLNMIIT 2k23"} <example.com>`, // sender address
-	// 	to: "theaditya1985@gmail.com", // list of receivers
-	// 	subject: "Hello ✔", // Subject line
-	// 	text: "Successfully Register with us.", // plain text body
-	// 	html: "<b>Successfully Register with us.</b>", // html body
-	// };
 	transporter
 		.sendMail(mailData)
 		.then((info) => {
