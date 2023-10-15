@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const signup = async (req, res) => {
-    console.log(req.body);
+    console.log(req);
 	let transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",
 		port: 465,
