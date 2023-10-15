@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const signup = async (req, res) => {
-    console.log(req);
+    const {email, name, number, file} = req.body;
 	let transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",
 		port: 465,
@@ -12,16 +12,21 @@ const signup = async (req, res) => {
 			pass: process.env.PASS, 
 		},
 	});
-
-	let message = {
-		from: `${"TEDxLNMIIT 2k23"} <example.com>`, // sender address
-		to: "theaditya1985@gmail.com", // list of receivers
-		subject: "Hello ✔", // Subject line
-		text: "Successfully Register with us.", // plain text body
-		html: "<b>Successfully Register with us.</b>", // html body
-	};
+    const mailData = {
+        from: `${"TEDxLNMIIT 2k23"} <example.com>`,
+        to: "theaditya1985@gmail.com",
+        subject: `Payment Confirmation email from ${email}`,
+        html: `<p>Payment has done by: ${name} <br/> email: ${email}<br/> phoneNumber: ${number}<br/> file is attached below ->${file}</p>`
+    };
+	// let message = {
+	// 	from: `${"TEDxLNMIIT 2k23"} <example.com>`, // sender address
+	// 	to: "theaditya1985@gmail.com", // list of receivers
+	// 	subject: "Hello ✔", // Subject line
+	// 	text: "Successfully Register with us.", // plain text body
+	// 	html: "<b>Successfully Register with us.</b>", // html body
+	// };
 	transporter
-		.sendMail(message)
+		.sendMail(mailData)
 		.then((info) => {
 			return res.status(201).json({
 				msg: "you should receive an email",
