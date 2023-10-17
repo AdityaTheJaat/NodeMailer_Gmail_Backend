@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors({
     origin: "*",
     credentials: true,}))
-app.use('/tedx', appRoute);
+app.use('/tedx/lnmiit', appRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)

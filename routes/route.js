@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const { sendMail } = require('../controller/appController.js');
+const { contactUs } = require('../controller/appController.js');
 const { signup } = require('../controller/register.js');
 
-router.post('/sendMail', sendMail);
+router.post('/contact', contactUs);
 router.post('/signup', signup)
 
 
