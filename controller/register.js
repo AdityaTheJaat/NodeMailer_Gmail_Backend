@@ -3,20 +3,21 @@ const User = require("../model/User");
 exports.signup = async(req, res) => {
   try{
     const { name, number, email, upiid, transactionid } = req.body;
+    console.log(name, number, email, upiid, transactionid)
     if(!name || !number || !email || !upiid || !transactionid){
       return res.status(400).json({
         message: 'Please provide all the required fields',
         success:false
       });
     }
-    const upiExist = await User.findOne({upiid:upiid});
+    const upiExist = await User.findOne({upiId:upiid});
     if(upiExist){
       return res.status(400).json({
         message: 'User already Exist with this upi id',
         success:false
       });
     }
-    const transactionExist = await User.findOne({transactionid:transactionid});
+    const transactionExist = await User.findOne({transactionId:transactionid});
     if(transactionExist){
       return res.status(400).json({
         message: 'User already Exist with this transaction id',
