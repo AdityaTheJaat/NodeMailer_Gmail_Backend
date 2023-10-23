@@ -3,6 +3,7 @@ const ContactUs = require("../model/ContactUs");
 require("dotenv").config();
 
 const sendMail = async (email, title, body) => {
+	console.log("Request Received")
 	try {
 		let transporter = nodemailer.createTransport({
 			host: "smtp.gmail.com",
@@ -28,6 +29,7 @@ const sendMail = async (email, title, body) => {
 };
 
 const contactUs = async (req, res) => {
+	console.log("Inside Contact Us")
 	try{
 		const { name, email, message } = req.body;
 		const details = await ContactUs.create({name:name, emailBy:email, message:message});

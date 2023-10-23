@@ -1,6 +1,7 @@
 const User = require("../model/User");
 
 exports.signup = async(req, res) => {
+  console.log("Inside Sign Up")
   try{
     const { name, number, email, upiid, transactionid } = req.body;
     console.log(name, number, email, upiid, transactionid)
