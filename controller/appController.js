@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const ContactUs = require("../model/ContactUs");
 require("dotenv").config();
 
 const sendMail = async (email, title, body) => {
@@ -27,34 +28,47 @@ const sendMail = async (email, title, body) => {
 };
 
 const contactUs = async (req, res) => {
-    const { name, email, message } = req.body;
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.MAIL,
-            pass: process.env.PASS,
-        },
-    });
-    const mailData = {
-        from: `${"TEDxLNMIIT 2k23"} <example.com>`,
-        to: "theaditya1985@gmail.com",
-        subject: `ContactUs email from ${email}`,
-        html: `<p>Email by: ${name} <br/> email: ${email}<br/> Message: ${message}<br/></p>`
-    };
-	transporter
-		.sendMail(mailData)
-		.then((info) => {
-			return res.status(201).json({
-				msg: "Email sent",
-				info: info.messageId,
-				preview: nodemailer.getTestMessageUrl(info),
-			});
+	try{
+		const { name, email, message } = req.body;
+		const details = await ContactUs.create({name:name, emailBy:email, message:message});
+		return res.status(200).json({
+			success:true,
+			message:"Contacted successfully!"
 		})
-		.catch((error) => {
-			return res.status(500).json({ error });
-		});
+	}	catch(err){
+		return res.status(500).json({
+			success:false,
+			message:"Cant contact!"
+		})
+	}
+    
+  //   let transporter = nodemailer.createTransport({
+  //       host: "smtp.gmail.com",
+  //       port: 465,
+  //       secure: true,
+  //       auth: {
+  //           user: process.env.MAIL,
+  //           pass: process.env.PASS,
+  //       },
+  //   });
+  //   const mailData = {
+  //       from: `${"TEDxLNMIIT 2k23"} <example.com>`,
+  //       to: "theaditya1985@gmail.com",
+  //       subject: `ContactUs email from ${email}`,
+  //       html: `<p>Email by: ${name} <br/> email: ${email}<br/> Message: ${message}<br/></p>`
+  //   };
+	// transporter
+	// 	.sendMail(mailData)
+	// 	.then((info) => {
+	// 		return res.status(201).json({
+	// 			msg: "Email sent",
+	// 			info: info.messageId,
+	// 			preview: nodemailer.getTestMessageUrl(info),
+	// 		});
+	// 	})
+	// 	.catch((error) => {
+	// 		return res.status(500).json({ error });
+	// 	});
 
 };
 
