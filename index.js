@@ -15,6 +15,10 @@ app.use(cors({
     credentials: true,}))
 app.use('/tedx/lnmiit', appRoute);
 
+app.get('/', (req, res) => {
+    res.send("TEDxLNMIIT2k23 server running!!!");
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })
