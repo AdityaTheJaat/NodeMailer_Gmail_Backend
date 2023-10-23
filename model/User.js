@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { sendMail } = require('../controller/appController');
 const otpTemplate = require('../utils/sendVerificationMail');
+const { sendMail } = require('../utils/sendMail');
 
 const userSchema = new mongoose.Schema({
   name:{
@@ -17,11 +17,11 @@ const userSchema = new mongoose.Schema({
   },
   upiId:{
     type:String,
-    // required:true
+    required:true
   },
   transactionId:{
     type:String,
-    // required:true
+    required:true
   },
   isVerified: {
     type: Boolean,

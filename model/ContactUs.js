@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { sendMail } = require('../controller/appController');
 const otpTemplate = require('../utils/sendVerificationMail');
+const { sendMail } = require('../utils/sendMail');
 
 const contactSchema = new mongoose.Schema({
   name:{

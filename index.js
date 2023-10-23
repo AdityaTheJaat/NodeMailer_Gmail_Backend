@@ -12,8 +12,8 @@ connectDB();
 app.use(express.json());
 const corsOptions = {
 	origin: [
-		"http://localhost:3000/",
-		"https://tedx-lnmiit-2k-23.vercel.app/",
+		"http://localhost:3000",
+		"https://tedx-lnmiit-2k-23.vercel.app",
 		"https://example3.com",
 	],
 	credentials: true,
