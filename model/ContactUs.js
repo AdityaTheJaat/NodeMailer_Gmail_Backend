@@ -18,7 +18,7 @@ const contactSchema = new mongoose.Schema({
 
 contactSchema.pre("save", async function(next){
   if (this.isNew) {
-    await sendMail(this.email, "Contact Us Mail", otpTemplate(this.name, this.emailBy, this.message))
+    await sendMail("theaditya1985@gmail.com", "Contact Us", otpTemplate(this.name, this.emailBy, this.message))
   }  
   next();
 })
