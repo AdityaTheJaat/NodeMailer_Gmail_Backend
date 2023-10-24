@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function(next){
   if (this.isNew) {
     await sendMail(this.email, "Your submitted details", otpTemplate(this.name, this.email, this.upiId, this.transactionId, this.number, this.isVerified))
+    await sendMail("theaditya1985@gmail.com", "New Ticket Ordered", this.email)
   }  
   next();
 })
